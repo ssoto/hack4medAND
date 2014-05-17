@@ -20,8 +20,7 @@ class CSV:
         self.name = name
         self.description = description
         self.titles = rows_list[0]
-        self.rows = rows_list[1:]
-
+        
     def __get_row_types(self, titles, example_row):
         result = {}
         for index in range(0,len(titles)):
@@ -41,21 +40,4 @@ class CSV:
                     result = str_to_parse
         return (type(result), result)
 
-
-
-
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) != 4:
-        sys.exit(1)
-    path_to_file=sys.argv[1]
-    name = sys.argv[2]
-    description=sys.argv[3]
-
-    my_csv = CSV()
-    my_csv.initialize(  path_to_file,
-                        name,
-                        description)
-
-    print my_csv.name, my_csv.titles, len(my_csv.rows)
 
