@@ -6,14 +6,12 @@ from lisa_models.key import Key_Model
 def persist_csv(csv_object, key_list=None):
     
     extended_keys = []
-    for title in csv_object.titles:
-        key_object = Key_Model(name=title).save()
+    key_list+=csv_object.titles
+    for title in key_list:
+        key_object = Key_Model.objects(name=title).first()
+        if not key_object:
+            key_object = Key_Model(name=title).save()
         extended_keys.append(key_object)
-        print "Added new tittle 1: %s" %(title)
-    for key in key_list:
-        key_object = Key_Model(name=key).save()
-        extended_keys.append(key_object)
-        print "Added new tittle 2: %s" %(key)
 
     #TODO: REVISAR SI METER TITLES POR DEFECTO
     csv_table = Table_Model.objects.create(
@@ -32,10 +30,12 @@ def add_keys(name, key_list):
     table = Table_Model.objects(name=name).first()
     keys = table.keys
     for key in key_list:
-        key = Key_Model(name=key).save()
+        key = Key_Model.objects(name=key).first()
+        if not key_object:
+            key_object = Key_Model(name=title).save()
         keys.append(key)
     table.keys = keys
     table.save()
 
 def get_all_keys():
-    return Key_Model.objects()
+    return Key_Model.objects().name
