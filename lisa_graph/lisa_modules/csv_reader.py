@@ -20,6 +20,7 @@ class CSV:
         self.name = name
         self.description = description
         self.titles = rows_list[0]
+        self.rows = rows_list[1:]
         
     def __get_row_types(self, titles, example_row):
         result = {}
