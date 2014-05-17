@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from lisa_search.forms import UploadDataForm
 from lisa_modules.csv_reader import CSV
 from lisa_models.table import Table_Model
-from lisa_modules.db_middleware import persist_csv
+from lisa_modules.db_middleware import persist_csv, get_last_created_tables
 from mongoengine import connect
 import tempfile
 
@@ -17,9 +17,10 @@ def index(request):
     )
 
 def search(request):
+    last_tables = get_last_created_tables()
     return render_to_response(
         'lisa_search/search.html', 
-        {}, 
+        {'last_entries': last_tables}, 
         context_instance=RequestContext(request)
     )
 
@@ -31,7 +32,6 @@ def upload(request):
         else:
             form = UploadDataForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
-            #import ipdb; ipdb.set_trace()
             data = request.FILES['data_set_file'].read()
             my_f = tempfile.NamedTemporaryFile(delete=False)
             my_f.file.write(data)
