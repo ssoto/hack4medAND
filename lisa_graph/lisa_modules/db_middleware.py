@@ -23,8 +23,16 @@ def persist_csv(csv_object, key_list=None):
         )
     csv_table.save()
 
-def get_suggested_keys(csv_table):
-    pass
+def get_suggested_keys(table_name):
+    suggested_keys = []
+    table = Table_Model.objects(name=table_name).first()
+    for key in get_all_keys():
+        key_name = key.name
+        table_description = table.description
+        if key_name in (table_name+table_description):
+            suggested_keys.append(key)
+    return suggested_keys
+
 
 def add_keys(name, key_list):
     table = Table_Model.objects(name=name).first()
@@ -38,4 +46,4 @@ def add_keys(name, key_list):
     table.save()
 
 def get_all_keys():
-    return Key_Model.objects().name
+    return Key_Model.objects()
