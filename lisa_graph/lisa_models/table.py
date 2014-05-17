@@ -2,10 +2,10 @@
 from mongoengine import *
 
 class Table_Model (Document):
-	name = StringField()
-	description = StringField()
-	titles = ListField()
-	rows = ListField()
-	keys = ListField()
+    name = StringField()
+    description = StringField()
+    titles = ListField()
+    rows = ListField()
+    keys = ListField()
 
 
