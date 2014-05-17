@@ -31,7 +31,7 @@ def add_keys(name, key_list):
     table = Table_Model.objects(name=name).first()
     keys = table.keys
     for key in key_list:
-        key = Key_Model(name=key)
+        key = Key_Model(name=key).save()
         keys.append(key)
     table.keys = keys
     table.save()
