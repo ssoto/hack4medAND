@@ -12,4 +12,3 @@ if __name__ == "__main__":
      					'CSV MOLÓN!')
     persist_csv(csv_object,
                  ['key', 'andalucia'])
-    #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
