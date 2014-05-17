@@ -28,4 +28,10 @@ def get_suggested_keys(csv_table):
     pass
 
 def add_keys(name, key_list):
-    pass
+    table = Table_Model.objects(name=name).first()
+    keys = table.keys
+    for key in key_list:
+        key = Key_Model(name=key)
+        keys.append(key)
+    table.keys = keys
+    table.save()

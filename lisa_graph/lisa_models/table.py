@@ -3,7 +3,7 @@ from mongoengine import *
 from lisa_models.key import Key_Model
 
 class Table_Model (Document):
-    name = StringField()
+    name = StringField(required=True)
     description = StringField()
     titles = ListField()
     rows = ListField()
