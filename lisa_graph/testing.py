@@ -6,10 +6,10 @@ from lisa_modules.db_middleware import persist_csv, add_keys
 if __name__ == "__main__":
     from mongoengine import connect
     connect('project1')
-    # csv_object = CSV()
-    # csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/file.csv', 
-    # 					'NOMBRE_CSV',
-    # 					'CSV MOLÓN!')
-    # persist_csv(csv_object,
-    #             ['key', 'andalucia'])
-    add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
+    csv_object = CSV()
+    csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/file.csv', 
+    					'NOMBRE_CSV',
+     					'CSV MOLÓN!')
+    persist_csv(csv_object,
+                 ['key', 'andalucia'])
+    #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])

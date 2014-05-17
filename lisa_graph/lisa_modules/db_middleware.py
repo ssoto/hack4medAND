@@ -7,12 +7,13 @@ def persist_csv(csv_object, key_list=None):
     
     extended_keys = []
     for title in csv_object.titles:
-        key_object = Key_Model(name=title)
+        key_object = Key_Model(name=title).save()
         extended_keys.append(key_object)
-    if key_list:
-        for key in key_list:
-            key_object = Key_Model(name=key)
-            extended_keys.append(key_object)
+        print "Added new tittle 1: %s" %(title)
+    for key in key_list:
+        key_object = Key_Model(name=key).save()
+        extended_keys.append(key_object)
+        print "Added new tittle 2: %s" %(key)
 
     #TODO: REVISAR SI METER TITLES POR DEFECTO
     csv_table = Table_Model.objects.create(
@@ -35,3 +36,6 @@ def add_keys(name, key_list):
         keys.append(key)
     table.keys = keys
     table.save()
+
+def get_all_keys():
+    return Key_Model.objects()
