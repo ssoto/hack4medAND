@@ -22,3 +22,8 @@ def persist_csv(csv_object, key_list=None):
         )
     csv_table.save()
 
+def get_last_created_tables():
+    last_tables = Table_Model.objects.order_by('-creation_date').limit(5)
+    for table in last_tables:
+        print table.creation_date
+
