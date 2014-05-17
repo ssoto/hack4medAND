@@ -13,6 +13,8 @@ if __name__ == "__main__":
      					'Tabla con las temperaturas por provincia')
     persist_csv(csv_object,
                  ['key', 'andalucia'])
+
     for key in get_suggested_keys('andalucia temperatura'):
     	print key.name
     #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
+
