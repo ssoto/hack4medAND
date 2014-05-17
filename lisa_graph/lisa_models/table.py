@@ -7,6 +7,5 @@ class Table_Model (Document):
     description = StringField()
     titles = ListField()
     rows = ListField()
-    keys = ListField(EmbeddedDocumentField(Key_Model))
-
-
+    keys = ListField(ReferenceField(Key_Model))
+    

@@ -1,4 +1,4 @@
 from mongoengine import *
 
-class Key_Model (EmbeddedDocument):
-	name = StringField()
+class Key_Model (Document):
+	name = StringField(required=True)
