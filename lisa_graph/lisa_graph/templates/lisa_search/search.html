@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block moduleSections %}
+    {% with section='search' %}
+        {{block.super}}
+    {% endwith %}
+{% endblock %}
+
+
+{% block content %}
+<h2>Search</h2>
+{% endblock content %}
+
