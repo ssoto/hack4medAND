@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
 from mongoengine import *
-from lisa_models.key import Key_Model
 import datetime
 
+from lisa_models.key import Key_Model
+
 class Table_Model (Document):
-    name = StringField(required=True)
+    name = StringField(required=True, unique=True)
     description = StringField()
     titles = ListField()
     rows = ListField()
