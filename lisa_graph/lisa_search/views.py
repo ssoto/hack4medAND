@@ -5,6 +5,7 @@ from lisa_search.forms import UploadDataForm
 from lisa_modules.csv_reader import CSV
 from lisa_models.table import Table_Model
 from lisa_modules.db_middleware import persist_csv, get_last_created_tables
+from lisa_modules.key_middleware import get_all_keys
 from mongoengine import connect
 import tempfile
 
@@ -18,11 +19,23 @@ def index(request):
 
 def search(request):
     last_tables = get_last_created_tables()
-    return render_to_response(
-        'lisa_search/search.html', 
-        {'last_entries': last_tables}, 
-        context_instance=RequestContext(request)
-    )
+    keys = get_all_keys()
+    if request.method == 'POST': # If the form has been submitted...
+        # ContactForm was defined in the previous section
+        #import pudb; pudb.set_trace()
+        keys_selected = request.POST.getlist('filterlist') or None
+        #TODO aplicar el filtro con los keys_selected
+        return render_to_response(
+            'lisa_search/search.html', 
+            {'last_entries': last_tables, 'selected_keys': keys_selected,'keys': keys}, 
+            context_instance=RequestContext(request)
+        )
+    else:
+        return render_to_response(
+            'lisa_search/search.html', 
+            {'last_entries': last_tables, 'keys': keys}, 
+            context_instance=RequestContext(request)
+        )
 
 def upload(request):
     if request.method == 'POST': # If the form has been submitted...

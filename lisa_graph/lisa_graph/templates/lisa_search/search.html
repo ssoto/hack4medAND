@@ -9,24 +9,49 @@
 
 {% block content %}
 <h2>Search</h2>
+
+<div class="row col-lg-3">
+    {% block filtering %}
+    {% if keys|length > 0 %}
+    <div class="col-lg-3">
+        <form action="{% url 'search' %}" id="filter" method="post">{% csrf_token %}
+        <select multiple="multiple" form="filter" name="filterlist" style="height: 200px">
+            {% for key in keys %}
+            <option value="{{key.name}}" {% if key.name in selected_keys %}selected{% endif %}>{{key.name}}</option>
+            {% endfor %}
+        </select>   
+            <input type="submit" name="filter" value="Filter" class="btn btn-success"/>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
 {% block timeline %}
+<div class="pull-right col-lg-9">
     {% for entry in last_entries %}
     <h4>{{entry.name}}</h4>
-    <div class="row col-lg-12">
-        <div class="col-lg-8">
-            <p>{{entry.description}}</p>
-        </div>
-        <div class="col-lg-3">
-            {{entry.creation_date.date.isoformat}}
-        </div>
+    <div class="col-lg-8">
+        <p>{{entry.description}}</p>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-3">
+        {{entry.creation_date.date.isoformat}}
+    </div>
+    <div class="col-lg-6">
         {% for k in entry.keys %}
         <strong>{{k.name}}</strong>
         {% endfor %}
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 {% endblock %}
+    </div>
+
+
+
+<!--{% block more_script %}-->
+    <!--[>$("select").multiselect().multiselectfilter();<]-->
+<!--{% endblock %}-->
 
 {% endblock content %}
 
