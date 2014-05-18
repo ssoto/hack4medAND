@@ -14,7 +14,7 @@ def persist_csv(csv_object, key_list=[]):
     if key_list:
         key_list += csv_object.titles
     else:
-        pass
+        key_list  = csv_object.titles
 
     for title in key_list:
         title = slugify(title)
