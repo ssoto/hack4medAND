@@ -9,9 +9,12 @@ from lisa_modules.real_table_middleware import save_table
 
 connect('lisa_project_db')
 
-def persist_csv(csv_object, key_list=None):
+def persist_csv(csv_object, key_list=[]):
     extended_keys = []
-    key_list.extend(csv_object.titles)
+    if key_list:
+        key_list += csv_object.titles
+    else:
+        pass
 
     for title in key_list:
         title = slugify(title)
