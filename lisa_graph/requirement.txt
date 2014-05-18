@@ -7,3 +7,4 @@ mongoengine==0.8.7
 pymongo==2.7
 six==1.6.1
 wsgiref==0.1.2
+django-autoslug==1.7.2

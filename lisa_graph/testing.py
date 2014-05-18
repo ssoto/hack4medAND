@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 from lisa_modules.csv_reader import CSV
 from lisa_models.table import Table_Model
-from lisa_modules.db_middleware import persist_csv, get_last_created_tables
+from lisa_modules.db_middleware import persist_csv, get_last_created_tables, filter_tables
 from lisa_modules.key_middleware import add_keys, get_all_keys,get_suggested_keys
 import sys
 
@@ -13,10 +13,13 @@ if __name__ == "__main__":
     					sys.argv[1],
      					'Tabla con las temperaturas por provincia')
     persist_csv(csv_object,
-                 ['key', 'andalucia'])
+                 ['key', 'andalucia', 'erdogan','rota'])
 
-    for key in get_suggested_keys('andalucia temperatura'):
-    	print key.name
     #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
 
-    get_last_created_tables()
+    for table in get_last_created_tables():
+    	print table.name
+
+    print "Filtered"
+    for table in filter_tables(["andalucia", "erdogan", "rota"]):
+    	print table.name

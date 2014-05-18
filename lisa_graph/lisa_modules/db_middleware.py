@@ -28,4 +28,21 @@ def persist_csv(csv_object, key_list=None):
 def get_last_created_tables():
     return Table_Model.objects.order_by('-creation_date').limit(5)
  
+def filter_tables(key_list):
+    key_tables = []
+    for key in key_list:
+        key_object = Key_Model.objects(name=key).first()
+        key_tables.append(Table_Model.objects.filter(keys__contains=key_object))
+    iterating_tables = key_tables[0]
+    filtered_table = []
+    for table in iterating_tables:
+        is_in_all=True
+        for tables_array in key_tables:
+            if not table in tables_array:
+                is_in_all = False
+                break
+        if is_in_all:
+            filtered_table.append(table)
+    return filtered_table
 
+        

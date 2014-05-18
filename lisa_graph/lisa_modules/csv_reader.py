@@ -30,9 +30,7 @@ class CSV:
             rows_list.append(row)
         ifile.close()
         return rows_list
-
-    ## Return a dictionary with:
-    #   colum name => type
+    
     def __get_row_types(self, titles, example_row):
         result = {}
         for index in range(0,len(titles)):
