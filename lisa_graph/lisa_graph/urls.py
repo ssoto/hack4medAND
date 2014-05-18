@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', 'lisa_search.views.index', name='index'),
     url(r'^search$', 'lisa_search.views.search', name='search'),
     url(r'^upload$', 'lisa_search.views.upload', name='upload'),
+    url(r'^show_table/(?P<table_name>.*)$', 'lisa_search.views.show_table', name='show_table'),
     url(r'^admin/', include(admin.site.urls)),
 )
 urlpatterns += patterns('',

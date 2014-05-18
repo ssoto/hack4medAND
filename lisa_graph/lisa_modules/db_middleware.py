@@ -5,6 +5,8 @@ from lisa_models.key import Key_Model
 from django.template.defaultfilters import slugify
 from mongoengine import connect
 
+from lisa_modules.real_table_middleware import save_table
+
 connect('lisa_project_db')
 
 def persist_csv(csv_object, key_list=None):
@@ -25,10 +27,12 @@ def persist_csv(csv_object, key_list=None):
         titles = csv_object.titles,
         rows = csv_object.rows,
         keys = extended_keys,
-        types = csv_object.row_types,
         row_types = csv_object.row_types
     )
     csv_table.save()
+    # y guardamos las tablas con datos
+    save_table(csv_table.name)
+
 
 def get_last_created_tables():
     return Table_Model.objects.order_by('-creation_date').limit(5)
