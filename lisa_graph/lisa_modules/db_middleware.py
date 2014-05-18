@@ -5,7 +5,8 @@ from lisa_models.key import Key_Model
 
 def persist_csv(csv_object, key_list=None):
     extended_keys = []
-    key_list+=csv_object.titles
+    key_list.extend(csv_object.titles)
+
     for title in key_list:
         key_object = Key_Model.objects(name=title).first()
         if not key_object:
@@ -18,8 +19,10 @@ def persist_csv(csv_object, key_list=None):
         description = csv_object.description,
         titles = csv_object.titles,
         rows = csv_object.rows,
-        keys = extended_keys
-        )
+        keys = extended_keys,
+        types = csv_object.row_types,
+        row_types = csv_object.row_types
+    )
     csv_table.save()
 
 def get_last_created_tables():
