@@ -29,7 +29,7 @@ def filter_tables(key_list):
     key_tables = []
     for key in key_list:
         key_object = Key_Model.objects(name=key).first()
-        key_tables.append(Table_Model.objects.filter(keys__contains=key_object))
+        key_tables.append(Table_Model.objects.filter(keys__contains=key))
     iterating_tables = key_tables[0]
     filtered_table = []
     for table in iterating_tables:

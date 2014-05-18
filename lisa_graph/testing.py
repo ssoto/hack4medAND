@@ -4,9 +4,9 @@ from lisa_models.table import Table_Model
 from lisa_modules.db_middleware import persist_csv, get_last_created_tables, filter_tables
 from lisa_modules.key_middleware import add_keys, get_all_keys,get_suggested_keys
 import sys
+from mongoengine import connect
 
-if __name__ == "__main__":
-    from mongoengine import connect
+def main():
     connect('project1')
     csv_object = CSV()
     csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/file.csv', 
@@ -23,3 +23,6 @@ if __name__ == "__main__":
     print "Filtered"
     for table in filter_tables(["andalucia", "erdogan", "rota"]):
     	print table.name
+
+if __name__ == "__main__":
+    main()
