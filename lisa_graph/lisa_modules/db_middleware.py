@@ -3,6 +3,9 @@ from lisa_modules.csv_reader import CSV
 from lisa_models.table import Table_Model
 from lisa_models.key import Key_Model
 from django.template.defaultfilters import slugify
+from mongoengine import connect
+
+connect('lisa_project_db')
 
 def persist_csv(csv_object, key_list=None):
     extended_keys = []
@@ -46,5 +49,3 @@ def filter_tables(key_list):
         if is_in_all:
             filtered_table.append(table)
     return filtered_table
-
-        
