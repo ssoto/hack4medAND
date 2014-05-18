@@ -9,10 +9,16 @@ def main():
     connect('project1')
     csv_object = CSV()
     csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/file.csv', 
-                        "tabla2",
-                        'Tabla con las temperaturas por provincia')
+                        "meteorologia_cordoba",
+                        'Datos meteorológicos de Córdoba')
     persist_csv(csv_object,
-                 ['key', 'Andalucia', 'erdogan'])
+                 ['cordoba', 'Andalucia', 'temperatura', 'humedad', 'meteorologia', 'estaciones'])
+
+    csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/estaciones.csv',
+                        "estaciones_meteorologicas",
+                        'Localización de las estaciones meteorologicas de Andalucia')
+    persist_csv(csv_object,
+                ['cordoba', 'cadiz', 'sevilla', 'huelva', 'almeria', 'meteorologia', 'estaciones' ])
 
     #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
 
@@ -20,7 +26,7 @@ def main():
         print table.name
 
     print "Filtered tables:"
-    for table in filter_tables(['rota']):
+    for table in filter_tables(['cadiz']):
        print table.name
 
 if __name__ == "__main__":
