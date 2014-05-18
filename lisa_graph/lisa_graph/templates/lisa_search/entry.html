@@ -1,0 +1,19 @@
+{% if not entries|length > 0%}
+<h2>There is no entries for this selection or timeline</h2>
+{% else %}
+{% for entry in entries %}
+<h3><a href="{% url 'show_table' entry.name %}" target="_blank">{{entry.name}}</a></h3>
+<div class="col-lg-8">
+    <p>{{entry.description}}</p>
+</div>
+<div class="col-lg-4">
+    {{entry.creation_date.date.isoformat}}
+</div>
+<br>
+<div class="col-lg-12" style="font-size:11px">
+    {% for k in entry.keys %}
+    <strong>{{k.name}}</strong>
+    {% endfor %}
+</div>
+{% endfor %}
+{% endif %}

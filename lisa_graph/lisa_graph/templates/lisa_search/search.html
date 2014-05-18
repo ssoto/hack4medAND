@@ -15,7 +15,7 @@
         {% if keys|length > 0 %}
         <div class="col-lg-3">
             <form action="{% url 'search' %}" id="filter" method="post">{% csrf_token %}
-                <select multiple="multiple" form="filter" name="filterlist" style="height: 200px">
+                <select multiple="multiple" form="filter" name="filterlist" style="height: 200px; max-width:200px">
                     {% for key in keys %}
                     <option value="{{key.name}}" {% if key.name in selected_keys %}selected{% endif %}>{{key.name}}</option>
                     {% endfor %}
@@ -30,21 +30,15 @@
     {% block timeline %}
     <div class="pull-right col-lg-9">
         <div class="col-lg-12">
-            {% for entry in last_entries %}
-            <h3>{{entry.name}}</h3>
-            <div class="col-lg-8">
-                <p>{{entry.description}}</p>
-            </div>
-            <div class="col-lg-4">
-                {{entry.creation_date.date.isoformat}}
-            </div>
-            <br>
-            <div class="col-lg-12" style="font-size:11px">
-                {% for k in entry.keys %}
-                <strong>{{k.name}}</strong>
-                {% endfor %}
-            </div>
-    {% endfor %}
+            {% if last_entries %} 
+                {% with last_entries as entries %}
+                    {% include 'lisa_search/entry.html' %}
+                {% endwith %}
+            {% else %}
+                {% with filtered_entries as entries %}
+                    {% include 'lisa_search/entry.html' %}
+                {% endwith %}
+            {% endif %}
         </div>
     </div>
     {% endblock %}

@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from lisa_search.forms import UploadDataForm
 from lisa_modules.csv_reader import CSV
 from lisa_models.table import Table_Model
-from lisa_modules.db_middleware import persist_csv, get_last_created_tables
+from lisa_modules.db_middleware import persist_csv, get_last_created_tables, filter_tables
 from lisa_modules.key_middleware import get_all_keys
 from mongoengine import connect
 import tempfile
@@ -24,10 +24,11 @@ def search(request):
         # ContactForm was defined in the previous section
         #import pudb; pudb.set_trace()
         keys_selected = request.POST.getlist('filterlist') or None
-        #TODO aplicar el filtro con los keys_selected
+        filtered_entries = filter_tables(keys_selected)
         return render_to_response(
             'lisa_search/search.html', 
-            {'last_entries': last_tables, 'selected_keys': keys_selected,'keys': keys}, 
+            {'selected_keys': keys_selected,'keys': keys,
+                'filtered_entries': filtered_entries}, 
             context_instance=RequestContext(request)
         )
     else:
@@ -50,12 +51,12 @@ def upload(request):
             my_f.file.write(data)
             my_f.close()
             connect('lisa_project_db')
+            list_key = None
             csv_object = CSV()
             csv_object.initialize(my_f.name, 
                                 form.data['name'], 
                                 form.data['description'])
-            persist_csv(csv_object,
-                        ['key', 'andalucia', 'reciensubido'])
+            persist_csv(csv_object, list_key)
             
             return render_to_response(
                 'lisa_search/upload.html', 
@@ -68,3 +69,25 @@ def upload(request):
         'lisa_search/upload.html', 
         {'form':form}, 
         context_instance=RequestContext(request))
+
+def show_table(request, table_name):
+    last_tables = get_last_created_tables()
+    keys = get_all_keys()
+    if request.method == 'POST': # If the form has been submitted...
+        # ContactForm was defined in the previous section
+        #import pudb; pudb.set_trace()
+        keys_selected = request.POST.getlist('filterlist') or None
+        filtered_entries = filter_tables(keys_selected)
+        return render_to_response(
+            'lisa_search/search.html', 
+            {'selected_keys': keys_selected,'keys': keys,
+                'filtered_entries': filtered_entries}, 
+            context_instance=RequestContext(request)
+        )
+    else:
+        return render_to_response(
+            'lisa_search/search.html', 
+            {'last_entries': last_tables, 'keys': keys}, 
+            context_instance=RequestContext(request)
+        )
+
