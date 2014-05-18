@@ -20,6 +20,11 @@ def main():
     persist_csv(csv_object,
                 ['cordoba', 'cadiz', 'sevilla', 'huelva', 'almeria', 'meteorologia', 'estaciones' ])
 
+    csv_object.initialize('/home/alicia/hack4medAND/lisa_graph/resources/datos_estaciones_almeria.csv',
+                        "meteorologia_almeria",
+                        "Datos metorologicos de Almería")
+    persist_csv(csv_object,
+                ["almeria", "andalucia", "temperatura", "humedad", "meteorologia", "estaciones"])
     #add_keys('NOMBRE_CSV',['HOLA', 'MUNDO'])
 
     for table in get_last_created_tables():
