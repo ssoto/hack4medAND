@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% block moduleSections %}
+{% endblock %}
+{%block content%}
+</div>
+<div>
+<table class="table pull-left table-striped">
+    <thead>
+        <tr>
+            {% for title in titles %}
+            <th>{{title}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+    <tr>
+        {% for elem in row %}
+        <td>{{elem}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
