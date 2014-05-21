@@ -1,9 +1,10 @@
 Lisa-graph Project
 ========
-Project developed during hackathon [hack4medAND](http://hack4med.homerproject.eu/andalusia/ "hack4med ")
+Project developed during the hackathon [hack4medAND](http://hack4med.homerproject.eu/andalusia/ "hack4med ") in Seville.
 
-Our tool enable relations between uploaded CSVs field files. 
-We enable smarte use of datasets provided to HomerProject organizations.
+Users can upload CSVs files to Lisa-graph. The CSVs are converted in data base tables and then an user can make relations between database tables fields.
+
+The objetive is to do a smarter use of datasets provided to HomerProject organizations.
 
 ![system diagram](https://dl.dropboxusercontent.com/u/3620266/hack4med.png "lisa-graph")
 
