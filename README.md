@@ -27,4 +27,4 @@ Now open in a borwse:
 
 ===========
 
-Project developed during  => [hack4medAND](http://hack4med.homerproject.eu/andalusia/ "hack4med ")
+Project developed during hackathon [hack4medAND](http://hack4med.homerproject.eu/andalusia/ "hack4med ")
